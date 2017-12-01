@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/adamhei/honors-project/handlers"
+	"github.com/adamhei/honorsproject/handlers"
 	"github.com/gorilla/mux"
 	"net/http"
 )

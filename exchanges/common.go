@@ -1,12 +1,12 @@
 package exchanges
 
 import (
-	"github.com/adamhei/honors-project/exchanges/bitfinex"
-	"github.com/adamhei/honors-project/exchanges/gdax"
-	"github.com/adamhei/honors-project/exchanges/gemini"
-	"github.com/adamhei/honors-project/exchanges/kraken"
-	"github.com/adamhei/honors-project/exchanges/models"
-	"github.com/adamhei/honors-project/exchanges/poloniex"
+	"github.com/adamhei/honorsproject/exchanges/bitfinex"
+	"github.com/adamhei/honorsproject/exchanges/gdax"
+	"github.com/adamhei/honorsproject/exchanges/gemini"
+	"github.com/adamhei/honorsproject/exchanges/kraken"
+	"github.com/adamhei/honorsproject/exchanges/models"
+	"github.com/adamhei/honorsproject/exchanges/poloniex"
 )
 
 const NUMEXCHANGES = 5

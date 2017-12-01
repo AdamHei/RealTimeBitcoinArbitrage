@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/adamhei/honors-project/exchanges/gemini"
+	"github.com/adamhei/honorsproject/exchanges/gemini"
 	"github.com/gorilla/mux"
 	"net/http"
 	"time"

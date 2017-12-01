@@ -3,7 +3,7 @@ package gemini
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/adamhei/honors-project/exchanges/models"
+	"github.com/adamhei/honorsproject/exchanges/models"
 	"net/http"
 	"time"
 )

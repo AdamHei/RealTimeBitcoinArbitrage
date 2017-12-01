@@ -2,8 +2,8 @@ package poloniex
 
 import (
 	"encoding/json"
-	"github.com/adamhei/honors-project/exchanges/errorhandling"
-	"github.com/adamhei/honors-project/exchanges/models"
+	"github.com/adamhei/honorsproject/exchanges/errorhandling"
+	"github.com/adamhei/honorsproject/exchanges/models"
 	"net/http"
 )
 

@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
-	"github.com/adamhei/honors-project/exchanges/errorhandling"
+	"github.com/adamhei/honorsproject/exchanges/errorhandling"
 	"log"
 	"net/http"
 )

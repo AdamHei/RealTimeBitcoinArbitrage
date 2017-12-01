@@ -1,7 +1,7 @@
 package errorhandling
 
 import (
-	"github.com/adamhei/honors-project/exchanges/models"
+	"github.com/adamhei/honorsproject/exchanges/models"
 	"log"
 )
 

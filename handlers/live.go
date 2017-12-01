@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"github.com/adamhei/honors-project/exchanges"
-	"github.com/adamhei/honors-project/exchanges/models"
+	"github.com/adamhei/honorsproject/exchanges"
+	"github.com/adamhei/honorsproject/exchanges/models"
 	"math"
 	"net/http"
 	"strconv"
