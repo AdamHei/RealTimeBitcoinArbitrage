@@ -11,12 +11,12 @@ const (
 	GET = "GET"
 )
 
-type route struct {
-	Name, Method, Pattern string
-	HandlerFunc           http.HandlerFunc
-}
+//type route struct {
+//	Name, Method, Pattern string
+//	HandlerFunc           http.HandlerFunc
+//}
 
-type RouteList []route
+//type RouteList []route
 
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
@@ -36,10 +36,10 @@ func NewRouter() *mux.Router {
 		Name("BiggestSpread").
 		HandlerFunc(handlers.BiggestSpread)
 
-	router.Methods(GET).
-		Path("/historical-data/compare/{exchange1}/{exchange2}").
-		Name("CompareHistory").
-		HandlerFunc(handlers.Compare)
+	//router.Methods(GET).
+	//	Path("/historical-data/compare/{exchange1}/{exchange2}").
+	//	Name("CompareHistory").
+	//	HandlerFunc(handlers.Compare)
 
 	router.Headers("Content-Type", "application/json")
 	return router

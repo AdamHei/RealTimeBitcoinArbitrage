@@ -10,6 +10,7 @@ import (
 
 const historyUrl = "https://api.gemini.com/v1/trades/btcusd?since=%d&limit_trades=500"
 
+// Deprecated
 func GetTradeHistory(from time.Time, to time.Time) []models.GeminiOrder {
 	orders := make([]models.GeminiOrder, 0)
 	for indexTime := from; indexTime.Before(to); {
