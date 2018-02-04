@@ -1,4 +1,4 @@
-package models
+package tickermodels
 
 func (response KrakenTicker) GetExchangeData() LimitedJson {
 	return LimitedJson{

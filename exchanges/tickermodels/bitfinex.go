@@ -1,4 +1,4 @@
-package models
+package tickermodels
 
 func (response BitfinexTicker) GetExchangeData() LimitedJson {
 	return LimitedJson{

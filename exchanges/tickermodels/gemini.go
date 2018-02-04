@@ -1,4 +1,4 @@
-package models
+package tickermodels
 
 func (response GeminiTicker) GetExchangeData() LimitedJson {
 	return LimitedJson{

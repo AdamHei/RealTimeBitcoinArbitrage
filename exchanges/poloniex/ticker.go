@@ -3,21 +3,21 @@ package poloniex
 import (
 	"encoding/json"
 	"github.com/adamhei/honorsproject/exchanges/errorhandling"
-	"github.com/adamhei/honorsproject/exchanges/models"
+	"github.com/adamhei/honorsproject/exchanges/tickermodels"
 	"net/http"
 )
 
 const tickerUrl = "http://poloniex.com/public?command=returnTicker"
 const tickerTag = "USDT_BTC"
 
-func FetchBidAskPoloniex(ch chan<- models.LimitedJson) {
+func FetchBidAskPoloniex(ch chan<- tickermodels.LimitedJson) {
 	resp, err := http.Get(tickerUrl)
 	if err != nil {
 		errorhandling.ErrorHandler("Could not fetch Poloniex data: "+err.Error(), ch)
 		return
 	}
 
-	fullResponse := new(map[string]models.PoloniexTicker)
+	fullResponse := new(map[string]tickermodels.PoloniexTicker)
 	err = json.NewDecoder(resp.Body).Decode(fullResponse)
 	resp.Body.Close()
 

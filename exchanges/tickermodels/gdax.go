@@ -1,4 +1,4 @@
-package models
+package tickermodels
 
 import (
 	"time"

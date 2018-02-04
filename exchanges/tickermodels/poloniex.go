@@ -1,4 +1,4 @@
-package models
+package tickermodels
 
 func (response PoloniexTicker) GetExchangeData() LimitedJson {
 	return LimitedJson{

@@ -2,20 +2,20 @@ package kraken
 
 import (
 	"github.com/adamhei/honorsproject/exchanges/errorhandling"
-	"github.com/adamhei/honorsproject/exchanges/models"
+	"github.com/adamhei/honorsproject/exchanges/tickermodels"
 	"net/http"
 	"encoding/json"
 )
 
 const tickerUrl = "https://api.kraken.com/0/public/Ticker?pair=XBTUSD"
 
-func FetchBidAskKraken(ch chan<- models.LimitedJson) {
+func FetchBidAskKraken(ch chan<- tickermodels.LimitedJson) {
 	resp, err := http.Get(tickerUrl)
 	if err != nil {
 		errorhandling.ErrorHandler("Could not fetch Kraken data:"+err.Error(), ch)
 	}
 
-	krakenResponse := new(models.KrakenTicker)
+	krakenResponse := new(tickermodels.KrakenTicker)
 	err = json.NewDecoder(resp.Body).Decode(krakenResponse)
 
 	resp.Body.Close()

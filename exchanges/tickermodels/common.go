@@ -1,4 +1,4 @@
-package models
+package tickermodels
 
 type ITicker interface {
 	GetExchangeData() LimitedJson

@@ -1,7 +1,7 @@
 package errorhandling
 
 import (
-	"github.com/adamhei/honorsproject/exchanges/models"
+	"github.com/adamhei/honorsproject/exchanges/tickermodels"
 	"log"
 )
 
@@ -19,7 +19,7 @@ func (e *MyError) ErrorCode() int {
 }
 
 // Print the error message and send an empty response through the channel
-func ErrorHandler(errorMsg string, ch chan<- models.LimitedJson) {
+func ErrorHandler(errorMsg string, ch chan<- tickermodels.LimitedJson) {
 	log.Print(errorMsg)
-	ch <- make(models.LimitedJson)
+	ch <- make(tickermodels.LimitedJson)
 }

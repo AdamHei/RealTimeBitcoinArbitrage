@@ -3,7 +3,6 @@ package routes
 import (
 	"github.com/adamhei/honorsproject/handlers"
 	"github.com/gorilla/mux"
-	"net/http"
 )
 
 // HTTP methods
@@ -35,11 +34,6 @@ func NewRouter() *mux.Router {
 		Path("/exchange-data/biggest-spread").
 		Name("BiggestSpread").
 		HandlerFunc(handlers.BiggestSpread)
-
-	//router.Methods(GET).
-	//	Path("/historical-data/compare/{exchange1}/{exchange2}").
-	//	Name("CompareHistory").
-	//	HandlerFunc(handlers.Compare)
 
 	router.Headers("Content-Type", "application/json")
 	return router
