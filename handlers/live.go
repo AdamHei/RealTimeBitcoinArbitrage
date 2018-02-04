@@ -3,6 +3,7 @@ package handlers
 import (
 	"github.com/adamhei/honorsproject/exchanges"
 	"github.com/adamhei/honorsproject/exchanges/tickermodels"
+	"log"
 	"math"
 	"net/http"
 	"strconv"
@@ -10,6 +11,7 @@ import (
 
 // Return the biggest spread between the highest bid and the lowest ask among all exchanges
 func BiggestSpread(writer http.ResponseWriter, _ *http.Request) {
+	log.Println("Requesting the biggest spread")
 	ch := make(chan tickermodels.LimitedJson)
 
 	exchanges.FetchAllExchanges(ch)
@@ -47,6 +49,7 @@ func BiggestSpread(writer http.ResponseWriter, _ *http.Request) {
 
 // Return the Bid/Ask data for all exchanges
 func AllBidAskData(writer http.ResponseWriter, _ *http.Request) {
+	log.Println("Requesting all Bid/Ask data")
 	ch := make(chan tickermodels.LimitedJson)
 
 	exchanges.FetchAllExchanges(ch)
