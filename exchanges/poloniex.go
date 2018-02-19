@@ -2,7 +2,7 @@ package exchanges
 
 import (
 	"encoding/json"
-	"github.com/adamhei/honorsproject/exchanges/tickermodels"
+	"github.com/adamhei/honorsproject/tickermodels"
 	"net/http"
 	"time"
 )
@@ -10,7 +10,7 @@ import (
 const poloniexEndpoint = "http://poloniex.com/public?command=returnTicker"
 const USDT_BTC = "USDT_BTC"
 
-func fetchBidAskPoloniex(ch chan<- tickermodels.LimitedJson) {
+func fetchBidAskPoloniex(ch chan<- tickermodels.Ticker) {
 	// Poloniex can be slow, so we nix the request if it takes too long
 	timeout := time.Duration(500 * time.Millisecond)
 	client := http.Client{

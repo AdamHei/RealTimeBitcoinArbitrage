@@ -11,11 +11,10 @@ type BitfinexTicker struct {
 	Timestamp string `json:"timestamp"`
 }
 
-func (response BitfinexTicker) GetExchangeData() LimitedJson {
-	return LimitedJson{
-		"Bitfinex": {
-			"Bid": response.Bid,
-			"Ask": response.Ask,
-		},
+func (response BitfinexTicker) GetExchangeData() Ticker {
+	return Ticker{
+		Exchange: "Bitfinex",
+		Bid:      response.Bid,
+		Ask:      response.Ask,
 	}
 }

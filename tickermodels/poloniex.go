@@ -1,11 +1,10 @@
 package tickermodels
 
-func (response PoloniexTicker) GetExchangeData() LimitedJson {
-	return LimitedJson{
-		"Poloniex": {
-			"Bid": response.Bid,
-			"Ask": response.Ask,
-		},
+func (response PoloniexTicker) GetExchangeData() Ticker {
+	return Ticker{
+		Exchange: "Poloniex",
+		Bid:      response.Bid,
+		Ask:      response.Ask,
 	}
 }
 

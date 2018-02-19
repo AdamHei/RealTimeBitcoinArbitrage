@@ -1,11 +1,10 @@
 package tickermodels
 
-func (response GeminiTicker) GetExchangeData() LimitedJson {
-	return LimitedJson{
-		"Gemini": {
-			"Bid": response.Bid,
-			"Ask": response.Ask,
-		},
+func (response GeminiTicker) GetExchangeData() Ticker {
+	return Ticker{
+		Exchange: "Gemini",
+		Bid:      response.Bid,
+		Ask:      response.Ask,
 	}
 }
 

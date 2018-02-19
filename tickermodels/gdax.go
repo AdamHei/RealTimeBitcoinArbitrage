@@ -4,12 +4,11 @@ import (
 	"time"
 )
 
-func (response GDAXTicker) GetExchangeData() LimitedJson {
-	return LimitedJson{
-		"GDAX": {
-			"Bid": response.Bid,
-			"Ask": response.Ask,
-		},
+func (response GDAXTicker) GetExchangeData() Ticker {
+	return Ticker{
+		Exchange: "GDAX",
+		Bid:      response.Bid,
+		Ask:      response.Ask,
 	}
 }
 

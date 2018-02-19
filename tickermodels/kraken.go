@@ -1,11 +1,10 @@
 package tickermodels
 
-func (response KrakenTicker) GetExchangeData() LimitedJson {
-	return LimitedJson{
-		"Kraken": {
-			"Bid": response.Result.XBTUSD.BidArr[0],
-			"Ask": response.Result.XBTUSD.AskArr[0],
-		},
+func (response KrakenTicker) GetExchangeData() Ticker {
+	return Ticker{
+		Exchange: "Kraken",
+		Bid:      response.Result.XBTUSD.BidArr[0],
+		Ask:      response.Result.XBTUSD.AskArr[0],
 	}
 }
 

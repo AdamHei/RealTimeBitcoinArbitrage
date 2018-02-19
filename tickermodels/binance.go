@@ -8,11 +8,10 @@ type BinanceTicker struct {
 	AskQuantity string `json:"askQty"`
 }
 
-func (response BinanceTicker) GetExchangeData() LimitedJson {
-	return LimitedJson{
-		"Binance": {
-			BID: response.BidPrice,
-			ASK: response.AskPrice,
-		},
+func (response BinanceTicker) GetExchangeData() Ticker {
+	return Ticker{
+		Bid:      response.BidPrice,
+		Ask:      response.AskPrice,
+		Exchange: "Binance",
 	}
 }

@@ -2,7 +2,7 @@ package exchanges
 
 import (
 	"fmt"
-	"github.com/adamhei/honorsproject/exchanges/tickermodels"
+	"github.com/adamhei/honorsproject/tickermodels"
 	"net/http"
 	"encoding/json"
 )
@@ -13,7 +13,7 @@ const binanceApiVersion = "v3"
 
 var binanceEndpoint = fmt.Sprintf("%s/api/%s/ticker/bookTicker", binanceBaseUrl, binanceApiVersion)
 
-func fetchBidAskBinance(ch chan<- tickermodels.LimitedJson) {
+func fetchBidAskBinance(ch chan<- tickermodels.Ticker) {
 	binanceRequest := buildBinanceRequest()
 	resp, err := http.Get(binanceRequest)
 

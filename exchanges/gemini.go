@@ -2,13 +2,13 @@ package exchanges
 
 import (
 	"encoding/json"
-	"github.com/adamhei/honorsproject/exchanges/tickermodels"
+	"github.com/adamhei/honorsproject/tickermodels"
 	"net/http"
 )
 
 const geminiEndpoint = "https://api.gemini.com/v1/pubticker/btcusd"
 
-func fetchBidAskData(ch chan<- tickermodels.LimitedJson) {
+func fetchBidAskData(ch chan<- tickermodels.Ticker) {
 	resp, err := http.Get(geminiEndpoint)
 	if err != nil {
 		errorHandler("Could not fetch Gemini data:"+err.Error(), ch)
