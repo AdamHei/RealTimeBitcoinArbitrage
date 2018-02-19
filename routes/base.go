@@ -26,12 +26,12 @@ func NewRouter() *mux.Router {
 		HandlerFunc(handlers.Index)
 
 	router.Methods(GET).
-		Path("/exchange-data/all").
+		Path("/live-spread/all").
 		Name("AllExchangeData").
 		HandlerFunc(handlers.AllBidAskData)
 
 	router.Methods(GET).
-		Path("/exchange-data/biggest-spread").
+		Path("/live-spread/widest").
 		Name("BiggestSpread").
 		HandlerFunc(handlers.BiggestSpread)
 

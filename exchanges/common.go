@@ -1,20 +1,14 @@
 package exchanges
 
-import (
-	"github.com/adamhei/honorsproject/exchanges/bitfinex"
-	"github.com/adamhei/honorsproject/exchanges/gdax"
-	"github.com/adamhei/honorsproject/exchanges/gemini"
-	"github.com/adamhei/honorsproject/exchanges/kraken"
-	"github.com/adamhei/honorsproject/exchanges/tickermodels"
-	"github.com/adamhei/honorsproject/exchanges/poloniex"
-)
+import "github.com/adamhei/honorsproject/exchanges/tickermodels"
 
-const NUMEXCHANGES = 5
+const NUMEXCHANGES = 6
 
 func FetchAllExchanges(ch chan<- tickermodels.LimitedJson) {
-	go poloniex.FetchBidAskPoloniex(ch)
-	go gemini.FetchBidAskData(ch)
-	go kraken.FetchBidAskKraken(ch)
-	go gdax.FetchBidAskGDAX(ch)
-	go bitfinex.FetchBidAskBitfinex(ch)
+	go fetchBidAskPoloniex(ch)
+	go fetchBidAskData(ch)
+	go fetchBidAskKraken(ch)
+	go fetchBidAskGDAX(ch)
+	go fetchBidAskBitfinex(ch)
+	go fetchBidAskBinance(ch)
 }

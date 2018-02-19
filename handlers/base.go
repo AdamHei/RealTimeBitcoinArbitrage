@@ -2,16 +2,16 @@ package handlers
 
 import (
 	"encoding/json"
-	"github.com/adamhei/honorsproject/exchanges/errorhandling"
 	"log"
 	"net/http"
+	"github.com/adamhei/honorsproject/exchanges"
 )
 
 func Index(writer http.ResponseWriter, _ *http.Request) {
 	respond(writer, "{Welcome to the Bitcoin Arbitrage Detector}", nil)
 }
 
-func respond(writer http.ResponseWriter, data interface{}, err *errorhandling.MyError) {
+func respond(writer http.ResponseWriter, data interface{}, err *exchanges.MyError) {
 	writer.Header().Set("Content-Type", "application/json; charset=utf-8")
 
 	if err != nil {

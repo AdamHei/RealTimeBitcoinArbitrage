@@ -1,14 +1,5 @@
 package tickermodels
 
-func (response BitfinexTicker) GetExchangeData() LimitedJson {
-	return LimitedJson{
-		"Bitfinex": {
-			"Bid": response.Bid,
-			"Ask": response.Ask,
-		},
-	}
-}
-
 type BitfinexTicker struct {
 	Mid       string `json:"mid"`
 	Bid       string `json:"bid"`
@@ -18,4 +9,13 @@ type BitfinexTicker struct {
 	High      string `json:"high"`
 	Volume    string `json:"volume"`
 	Timestamp string `json:"timestamp"`
+}
+
+func (response BitfinexTicker) GetExchangeData() LimitedJson {
+	return LimitedJson{
+		"Bitfinex": {
+			"Bid": response.Bid,
+			"Ask": response.Ask,
+		},
+	}
 }

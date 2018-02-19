@@ -5,3 +5,6 @@ type ITicker interface {
 }
 
 type LimitedJson map[string]map[string]string
+
+const BID = "Bid"
+const ASK = "Ask"
