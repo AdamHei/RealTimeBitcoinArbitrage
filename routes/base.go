@@ -31,9 +31,14 @@ func NewRouter() *mux.Router {
 		HandlerFunc(handlers.AllBidAskData)
 
 	router.Methods(GET).
-		Path("/live-spread/widest").
+		Path("/live-spread/biggest").
 		Name("BiggestSpread").
 		HandlerFunc(handlers.BiggestSpread)
+
+	router.Methods(GET).
+		Path("/live-spread/widest").
+		Name("WidestSpread").
+		HandlerFunc(handlers.WidestSpread)
 
 	router.Headers("Content-Type", "application/json")
 	return router

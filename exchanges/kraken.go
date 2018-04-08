@@ -1,12 +1,12 @@
 package exchanges
 
 import (
+	"encoding/json"
 	"github.com/adamhei/honorsproject/tickermodels"
 	"net/http"
-	"encoding/json"
 )
 
-const krakenEndpoint = "https://api.kraken.com/0/public/Ticker?pair=XBTUSD"
+const krakenEndpoint = "https://api.kraken.com/0/public/Depth?pair=XBTUSD&count=1"
 
 func fetchBidAskKraken(ch chan<- tickermodels.Ticker) {
 	resp, err := http.Get(krakenEndpoint)
@@ -14,7 +14,7 @@ func fetchBidAskKraken(ch chan<- tickermodels.Ticker) {
 		errorHandler("Could not fetch Kraken data:"+err.Error(), ch)
 	}
 
-	krakenResponse := new(tickermodels.KrakenTicker)
+	krakenResponse := new(tickermodels.KrakenBestBidAsk)
 	err = json.NewDecoder(resp.Body).Decode(krakenResponse)
 
 	resp.Body.Close()

@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-const gdaxEndpoint = "https://api.gdax.com/products/BTC-USD/ticker"
+const gdaxEndpoint = "https://api.gdax.com/products/BTC-USD/book"
 
 func fetchBidAskGDAX(ch chan<- tickermodels.Ticker) {
 	resp, err := http.Get(gdaxEndpoint)
@@ -15,7 +15,7 @@ func fetchBidAskGDAX(ch chan<- tickermodels.Ticker) {
 		return
 	}
 
-	gdaxResponse := new(tickermodels.GDAXTicker)
+	gdaxResponse := new(tickermodels.GDAXBestBidAsk)
 	err = json.NewDecoder(resp.Body).Decode(gdaxResponse)
 	resp.Body.Close()
 

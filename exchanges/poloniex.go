@@ -7,8 +7,7 @@ import (
 	"time"
 )
 
-const poloniexEndpoint = "http://poloniex.com/public?command=returnTicker"
-const USDT_BTC = "USDT_BTC"
+const poloniexEndpoint = "https://poloniex.com/public?command=returnOrderBook&currencyPair=USDT_BTC&depth=1"
 
 func fetchBidAskPoloniex(ch chan<- tickermodels.Ticker) {
 	// Poloniex can be slow, so we nix the request if it takes too long
@@ -23,8 +22,8 @@ func fetchBidAskPoloniex(ch chan<- tickermodels.Ticker) {
 		return
 	}
 
-	fullResponse := new(map[string]tickermodels.PoloniexTicker)
-	err = json.NewDecoder(resp.Body).Decode(fullResponse)
+	poloniexTicker := new(tickermodels.PoloniexBestBidAsk)
+	err = json.NewDecoder(resp.Body).Decode(poloniexTicker)
 	resp.Body.Close()
 
 	if err != nil {
@@ -32,6 +31,5 @@ func fetchBidAskPoloniex(ch chan<- tickermodels.Ticker) {
 		return
 	}
 
-	btcTicker := (*fullResponse)[USDT_BTC]
-	ch <- btcTicker.GetExchangeData()
+	ch <- poloniexTicker.GetExchangeData()
 }
