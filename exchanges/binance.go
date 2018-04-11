@@ -5,6 +5,7 @@ import (
 	"github.com/adamhei/honorsproject/tickermodels"
 	"net/http"
 	"encoding/json"
+	"strconv"
 )
 
 const BTCUSDT = "BTCUSDT"
@@ -30,6 +31,13 @@ func fetchBidAskBinance(ch chan<- tickermodels.Ticker) {
 		errorHandler("Could not parse Binance response"+err.Error(), ch)
 		return
 	}
+
+	// Binance gives way too many zeros after the second decimal digit
+	// This removes them
+	askPrice, _ := strconv.ParseFloat(binanceTicker.AskPrice, 64)
+	binanceTicker.AskPrice = strconv.FormatFloat(askPrice, 'f', 2, 64)
+	bidPrice, _ := strconv.ParseFloat(binanceTicker.BidPrice, 64)
+	binanceTicker.BidPrice = strconv.FormatFloat(bidPrice, 'f', 2, 64)
 
 	ch <- binanceTicker.GetExchangeData()
 }
