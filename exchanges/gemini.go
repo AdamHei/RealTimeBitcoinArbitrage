@@ -9,7 +9,7 @@ import (
 //const geminiEndpoint = "https://api.gemini.com/v1/pubticker/btcusd"
 const geminiEndpoint = "https://api.gemini.com/v1/book/btcusd?limit_bids=1&limit_asks=1"
 
-func fetchBidAskData(ch chan<- tickermodels.Ticker) {
+func fetchBidAskGemini(ch chan<- tickermodels.Ticker) {
 	resp, err := http.Get(geminiEndpoint)
 	if err != nil {
 		errorHandler("Could not fetch Gemini data:"+err.Error(), ch)

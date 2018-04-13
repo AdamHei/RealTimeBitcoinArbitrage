@@ -6,7 +6,7 @@ const NumExchanges = 6
 
 func FetchAllExchanges(ch chan<- tickermodels.Ticker) {
 	go fetchBidAskPoloniex(ch)
-	go fetchBidAskData(ch)
+	go fetchBidAskGemini(ch)
 	go fetchBidAskKraken(ch)
 	go fetchBidAskGDAX(ch)
 	go fetchBidAskBitfinex(ch)

@@ -47,9 +47,9 @@ func WidestSpread(writer http.ResponseWriter, _ *http.Request) {
 	}
 
 	bestAsk, _ := strconv.ParseFloat(buyTicker.Ask, 64)
-	bestAskSize, _ := strconv.ParseFloat(buyTicker.AskSize, 64)
+	bestAskQty, _ := strconv.ParseFloat(buyTicker.AskSize, 64)
 	bestBid, _ := strconv.ParseFloat(sellTicker.Bid, 64)
-	bestBidSize, _ := strconv.ParseFloat(sellTicker.BidSize, 64)
+	bestBidQty, _ := strconv.ParseFloat(sellTicker.BidSize, 64)
 
 	buyWithdrawalFee, _ := strconv.ParseFloat(buyTicker.BTCWithdrawalFee, 64)
 	buyTakerFee, _ := strconv.ParseFloat(buyTicker.TakerFee, 64)
@@ -58,19 +58,20 @@ func WidestSpread(writer http.ResponseWriter, _ *http.Request) {
 	sellTakerFee /= 100
 
 	var profit float64
-	buyAmt := bestAskSize*(1-buyTakerFee) - buyWithdrawalFee
+	effectivePurchaseQty := bestAskQty*(1-buyTakerFee) - buyWithdrawalFee
 	// We can buy less than the bid size on the sell exchange
-	if buyAmt <= bestBidSize {
-		invested := bestAsk * bestAskSize
-		returned := buyAmt * bestBid * (1 - sellTakerFee)
+	if effectivePurchaseQty <= bestBidQty {
+		invested := bestAsk * bestAskQty
+		returned := effectivePurchaseQty * bestBid * (1 - sellTakerFee)
 		profit = returned - invested
 	} else {
-		invested := bestAsk * bestBidSize
-		buyAmt = bestBidSize*(1-buyTakerFee) - buyWithdrawalFee
-		returned := buyAmt * bestBid * (1 - sellTakerFee)
+		invested := bestAsk * bestBidQty
+		effectivePurchaseQty = bestBidQty*(1-buyTakerFee) - buyWithdrawalFee
+		returned := effectivePurchaseQty * bestBid * (1 - sellTakerFee)
 		profit = returned - invested
 	}
 
+	btcQuantity := math.Min(bestAskQty, bestBidQty)
 	response := map[string]string{
 		"buyExchange":      buyTicker.Exchange,
 		"buyPrice":         buyTicker.Ask,
@@ -83,7 +84,8 @@ func WidestSpread(writer http.ResponseWriter, _ *http.Request) {
 		"sellQuantity": sellTicker.BidSize,
 		"sellTakerFee": sellTicker.TakerFee,
 
-		"profit": strconv.FormatFloat(profit, 'f', 2, 64),
+		"btcQuantity": strconv.FormatFloat(btcQuantity, 'f', -1, 64),
+		"profit":      strconv.FormatFloat(profit, 'f', 2, 64),
 	}
 	respond(writer, response, nil)
 }
