@@ -46,5 +46,6 @@ func (response GeminiBestBidAsk) GetExchangeData() Ticker {
 		MakerFee:         "1.0",
 		TakerFee:         "1.0",
 		BTCWithdrawalFee: "0.0",
+		HasWithdrawalFee: false,
 	}
 }

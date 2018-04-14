@@ -55,5 +55,6 @@ func (response KrakenBestBidAsk) GetExchangeData() Ticker {
 		MakerFee:         "0.16",
 		TakerFee:         "0.26",
 		BTCWithdrawalFee: "0.0005",
+		HasWithdrawalFee: true,
 	}
 }

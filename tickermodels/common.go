@@ -21,6 +21,7 @@ type Ticker struct {
 	TakerFee   string `json:"taker_fee"`
 	// In BTC
 	BTCWithdrawalFee string `json:"btc_withdrawal_fee"`
+	HasWithdrawalFee bool `json:"has_withdrawal_fee"`
 }
 
 func (ticker Ticker) String() string {

@@ -1,6 +1,5 @@
 package tickermodels
 
-
 type PoloniexTicker struct {
 	Id            int    `json:"id"`
 	LastPrice     string `json:"last"`
@@ -40,5 +39,6 @@ func (response PoloniexBestBidAsk) GetExchangeData() Ticker {
 		MakerFee:         "0.15",
 		TakerFee:         "0.25",
 		BTCWithdrawalFee: "0.0",
+		HasWithdrawalFee: false,
 	}
 }

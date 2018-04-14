@@ -51,5 +51,6 @@ func (response GDAXBestBidAsk) GetExchangeData() Ticker {
 		MakerFee:         "0.0",
 		TakerFee:         "0.25",
 		BTCWithdrawalFee: "0.0",
+		HasWithdrawalFee: false,
 	}
 }

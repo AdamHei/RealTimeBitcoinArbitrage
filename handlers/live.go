@@ -72,12 +72,13 @@ func WidestSpread(writer http.ResponseWriter, _ *http.Request) {
 	}
 
 	btcQuantity := math.Min(bestAskQty, bestBidQty)
-	response := map[string]string{
+	response := map[string]interface{}{
 		"buyExchange":      buyTicker.Exchange,
 		"buyPrice":         buyTicker.Ask,
 		"buyQuantity":      buyTicker.AskSize,
 		"buyTakerFee":      buyTicker.TakerFee,
 		"buyWithdrawalFee": buyTicker.BTCWithdrawalFee,
+		"hasWithdrawalFee": buyTicker.HasWithdrawalFee,
 
 		"sellExchange": sellTicker.Exchange,
 		"sellPrice":    sellTicker.Bid,

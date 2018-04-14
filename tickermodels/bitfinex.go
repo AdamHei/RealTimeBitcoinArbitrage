@@ -35,6 +35,7 @@ func (ticker BitfinexV2Ticker) GetExchangeData() Ticker {
 		MakerFee:         "0.1",
 		TakerFee:         "0.2",
 		BTCWithdrawalFee: "0.0004",
+		HasWithdrawalFee: true,
 	}
 }
 

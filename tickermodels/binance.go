@@ -19,5 +19,6 @@ func (response BinanceTicker) GetExchangeData() Ticker {
 		MakerFee:         "0.1",
 		TakerFee:         "0.1",
 		BTCWithdrawalFee: "0.0005",
+		HasWithdrawalFee: true,
 	}
 }
