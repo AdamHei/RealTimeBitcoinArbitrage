@@ -1,16 +1,5 @@
 package tickermodels
 
-type BitfinexTicker struct {
-	Mid       string `json:"mid"`
-	Bid       string `json:"bid"`
-	Ask       string `json:"ask"`
-	LastPrice string `json:"last_price"`
-	Low       string `json:"low"`
-	High      string `json:"high"`
-	Volume    string `json:"volume"`
-	Timestamp string `json:"timestamp"`
-}
-
 type BitfinexV2Ticker struct {
 	Bid                   float64
 	BidSize               float64
@@ -36,13 +25,5 @@ func (ticker BitfinexV2Ticker) GetExchangeData() Ticker {
 		TakerFee:         "0.2",
 		BTCWithdrawalFee: "0.0004",
 		HasWithdrawalFee: true,
-	}
-}
-
-func (response BitfinexTicker) GetExchangeData() Ticker {
-	return Ticker{
-		Exchange: "Bitfinex",
-		Bid:      response.Bid,
-		Ask:      response.Ask,
 	}
 }

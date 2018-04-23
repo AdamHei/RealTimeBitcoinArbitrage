@@ -9,6 +9,10 @@ import (
 	"strconv"
 )
 
+// WidestSpread pulls all exchange ticker data, calculate the largest price disparity between two exchanges, and
+// writes back all information necessary for the client to display the opportunity
+//
+// Note: the excessive string parsing is a necessary evil of how we return data to the client
 func WidestSpread(writer http.ResponseWriter, _ *http.Request) {
 	log.Println("Requesting the widest spread")
 
@@ -32,12 +36,14 @@ func WidestSpread(writer http.ResponseWriter, _ *http.Request) {
 		taker /= 100
 		withdrawal, _ := strconv.ParseFloat(ticker.BTCWithdrawalFee, 64)
 
+		// Save the buy exchange if it has the new lowest effective price
 		effectiveBuyPrice := (ask * askSize) / (askSize*(1-taker) - withdrawal)
 		if effectiveBuyPrice < bestEffectiveBuy {
 			bestEffectiveBuy = effectiveBuyPrice
 			buyTicker = ticker
 		}
 
+		// Save the sell exchange if it has the new highest effective price
 		bid, _ := strconv.ParseFloat(ticker.Bid, 64)
 		effectiveSellPrice := bid * (1 - taker)
 		if effectiveSellPrice > bestEffectiveSell {
@@ -57,20 +63,23 @@ func WidestSpread(writer http.ResponseWriter, _ *http.Request) {
 	sellTakerFee, _ := strconv.ParseFloat(sellTicker.TakerFee, 64)
 	sellTakerFee /= 100
 
+	// Find the theoretical profit
 	var profit float64
 	effectivePurchaseQty := bestAskQty*(1-buyTakerFee) - buyWithdrawalFee
-	// We can buy less than the bid size on the sell exchange
 	if effectivePurchaseQty <= bestBidQty {
+		// We can buy less than the bid size on the sell exchange
 		invested := bestAsk * bestAskQty
 		returned := effectivePurchaseQty * bestBid * (1 - sellTakerFee)
 		profit = returned - invested
 	} else {
+		// We can buy more than the bid size on the sell exchange
 		invested := bestAsk * bestBidQty
 		effectivePurchaseQty = bestBidQty*(1-buyTakerFee) - buyWithdrawalFee
 		returned := effectivePurchaseQty * bestBid * (1 - sellTakerFee)
 		profit = returned - invested
 	}
 
+	// Build the response
 	btcQuantity := math.Min(bestAskQty, bestBidQty)
 	response := map[string]interface{}{
 		"buyExchange":      buyTicker.Exchange,
@@ -87,49 +96,6 @@ func WidestSpread(writer http.ResponseWriter, _ *http.Request) {
 
 		"btcQuantity": strconv.FormatFloat(btcQuantity, 'f', -1, 64),
 		"profit":      strconv.FormatFloat(profit, 'f', 2, 64),
-	}
-	respond(writer, response, nil)
-}
-
-// Return the biggest spread between the highest bid and the lowest ask among all exchanges
-func BiggestSpread(writer http.ResponseWriter, _ *http.Request) {
-	log.Println("Requesting the biggest spread")
-	ch := make(chan tickermodels.Ticker)
-
-	exchanges.FetchAllExchanges(ch)
-
-	var buyExchange, sellExchange string
-	buyPrice := math.MaxFloat64
-	sellPrice := 0.0
-
-	for i := 0; i < exchanges.NumExchanges; i++ {
-		ticker := <-ch
-
-		if ticker.Exchange == "" {
-			// Skip over exchanges whose data we could not fetch
-			continue
-		}
-
-		v, _ := strconv.ParseFloat(ticker.Ask, 64)
-		if v < buyPrice {
-			buyExchange = ticker.Exchange
-			buyPrice = v
-		}
-
-		v, _ = strconv.ParseFloat(ticker.Bid, 64)
-		if v > sellPrice {
-			sellExchange = ticker.Exchange
-			sellPrice = v
-		}
-	}
-
-	spread := sellPrice - buyPrice
-	response := map[string]string{
-		"buyExchange":  buyExchange,
-		"sellExchange": sellExchange,
-		"buyPrice":     strconv.FormatFloat(buyPrice, 'f', -1, 64),
-		"sellPrice":    strconv.FormatFloat(sellPrice, 'f', -1, 64),
-		"spread":       strconv.FormatFloat(spread, 'f', -1, 64),
 	}
 	respond(writer, response, nil)
 }

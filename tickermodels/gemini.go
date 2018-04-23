@@ -1,20 +1,5 @@
 package tickermodels
 
-
-
-type GeminiTicker struct {
-	Bid       string `json:"bid"`
-	Ask       string `json:"ask"`
-	BTCVolume volume `json:"volume"`
-	Last      string `json:"last"`
-}
-
-type volume struct {
-	BTC       string `json:"BTC"`
-	USD       string `json:"USD"`
-	Timestamp int    `json:"timestamp"`
-}
-
 type GeminiBestBidAsk struct {
 	Bids []GeminiOpenOrder `json:"bids"`
 	Asks []GeminiOpenOrder `json:"asks"`
@@ -25,14 +10,6 @@ type GeminiOpenOrder struct {
 	Price     string `json:"price"`
 	Amount    string `json:"amount"`
 	Timestamp string `json:"timestamp"`
-}
-
-func (response GeminiTicker) GetExchangeData() Ticker {
-	return Ticker{
-		Exchange: "Gemini",
-		Bid:      response.Bid,
-		Ask:      response.Ask,
-	}
 }
 
 func (response GeminiBestBidAsk) GetExchangeData() Ticker {

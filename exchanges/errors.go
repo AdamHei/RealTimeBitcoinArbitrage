@@ -5,6 +5,8 @@ import (
 	"log"
 )
 
+// Custom error types to include http response codes
+
 type MyError struct {
 	Err  string
 	Code int
