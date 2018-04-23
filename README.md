@@ -7,6 +7,10 @@ API for providing real-time Bitcoin arbitrage data across several exchanges
 ## Usage
 `go run driver.go`
 
+## Endpoints
+- `/live-spread/widest` - Best opportunity at the given moment
+- `/live-spread/all` - all exchange bid/ask data
+
 ### Currently supported exchanges:
 - Binance
 - Bitfinex
