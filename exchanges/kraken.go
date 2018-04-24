@@ -11,7 +11,7 @@ const krakenEndpoint = "https://api.kraken.com/0/public/Depth?pair=XBTUSD&count=
 func fetchBidAskKraken(ch chan<- tickermodels.Ticker) {
 	resp, err := http.Get(krakenEndpoint)
 	if err != nil {
-		errorHandler("Could not fetch Kraken data:"+err.Error(), ch)
+		errorHandler("Could not fetch Kraken data:", err, ch)
 	}
 
 	krakenResponse := new(tickermodels.KrakenBestBidAsk)
@@ -19,7 +19,7 @@ func fetchBidAskKraken(ch chan<- tickermodels.Ticker) {
 
 	resp.Body.Close()
 	if err != nil {
-		errorHandler("Could not parse Kraken json:"+err.Error(), ch)
+		errorHandler("Could not parse Kraken json:", err, ch)
 		return
 	}
 

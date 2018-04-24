@@ -11,7 +11,7 @@ const gdaxEndpoint = "https://api.gdax.com/products/BTC-USD/book"
 func fetchBidAskGDAX(ch chan<- tickermodels.Ticker) {
 	resp, err := http.Get(gdaxEndpoint)
 	if err != nil {
-		errorHandler("Could not fetch data from GDAX:"+err.Error(), ch)
+		errorHandler("Could not fetch data from GDAX:", err, ch)
 		return
 	}
 
@@ -20,7 +20,7 @@ func fetchBidAskGDAX(ch chan<- tickermodels.Ticker) {
 	resp.Body.Close()
 
 	if err != nil {
-		errorHandler("Could not parse GDAX json:"+err.Error(), ch)
+		errorHandler("Could not parse GDAX json:", err, ch)
 		return
 	}
 

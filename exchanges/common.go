@@ -7,7 +7,7 @@ package exchanges
 import "github.com/adamhei/honorsproject/tickermodels"
 
 // The number of supported exchanges
-const NumExchanges = 7
+const NumExchanges = 8
 
 // FetchAllExchanges calls every exchange's Ticker-fetching method
 func FetchAllExchanges(ch chan<- tickermodels.Ticker) {
@@ -18,4 +18,5 @@ func FetchAllExchanges(ch chan<- tickermodels.Ticker) {
 	go fetchBidAskBitfinex(ch)
 	go fetchBidAskBinance(ch)
 	go fetchBidAskBitstamp(ch)
+	go fetchBidAskExMo(ch)
 }

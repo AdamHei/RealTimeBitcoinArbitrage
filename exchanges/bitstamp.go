@@ -11,7 +11,7 @@ const bitstampUrl = "https://www.bitstamp.net/api/order_book/"
 func fetchBidAskBitstamp(ch chan<- tickermodels.Ticker) {
 	resp, err := http.Get(bitstampUrl)
 	if err != nil {
-		errorHandler("Could not fetch order book from Bitstamp"+err.Error(), ch)
+		errorHandler("Could not fetch order book from Bitstamp", err, ch)
 		return
 	}
 
@@ -19,7 +19,7 @@ func fetchBidAskBitstamp(ch chan<- tickermodels.Ticker) {
 	err = json.NewDecoder(resp.Body).Decode(bitstampTicker)
 	resp.Body.Close()
 	if err != nil {
-		errorHandler("Could not parse Bitstamp response"+err.Error(), ch)
+		errorHandler("Could not parse Bitstamp response", err, ch)
 		return
 	}
 

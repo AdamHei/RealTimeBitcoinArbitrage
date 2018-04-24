@@ -12,7 +12,7 @@ const geminiEndpoint = "https://api.gemini.com/v1/book/btcusd?limit_bids=1&limit
 func fetchBidAskGemini(ch chan<- tickermodels.Ticker) {
 	resp, err := http.Get(geminiEndpoint)
 	if err != nil {
-		errorHandler("Could not fetch Gemini data:"+err.Error(), ch)
+		errorHandler("Could not fetch Gemini data:", err, ch)
 	}
 
 	geminiResponse := new(tickermodels.GeminiBestBidAsk)
@@ -20,7 +20,7 @@ func fetchBidAskGemini(ch chan<- tickermodels.Ticker) {
 
 	resp.Body.Close()
 	if err != nil {
-		errorHandler("Could not parse Gemini json:"+err.Error(), ch)
+		errorHandler("Could not parse Gemini json:", err, ch)
 		return
 	}
 

@@ -21,7 +21,8 @@ func (e *MyError) ErrorCode() int {
 }
 
 // Print the error message and send an empty response through the channel
-func errorHandler(errorMsg string, ch chan<- tickermodels.Ticker) {
-	log.Print(errorMsg)
+func errorHandler(customErr string, err error, ch chan<- tickermodels.Ticker) {
+	log.Println(customErr)
+	log.Println(err)
 	ch <- *new(tickermodels.Ticker)
 }

@@ -11,7 +11,7 @@ const bitfinexEndpoint = "https://api.bitfinex.com/v2/ticker/tBTCUSD"
 func fetchBidAskBitfinex(ch chan<- tickermodels.Ticker) {
 	resp, err := http.Get(bitfinexEndpoint)
 	if err != nil {
-		errorHandler("Could not fetch data from Bitfinex:"+err.Error(), ch)
+		errorHandler("Could not fetch data from Bitfinex:", err, ch)
 		return
 	}
 
@@ -19,7 +19,7 @@ func fetchBidAskBitfinex(ch chan<- tickermodels.Ticker) {
 	err = json.NewDecoder(resp.Body).Decode(&bitTickerArr)
 	resp.Body.Close()
 	if err != nil {
-		errorHandler("Could not parse Bitfinex response"+err.Error(), ch)
+		errorHandler("Could not parse Bitfinex response", err, ch)
 		return
 	}
 

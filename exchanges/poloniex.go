@@ -18,7 +18,7 @@ func fetchBidAskPoloniex(ch chan<- tickermodels.Ticker) {
 
 	resp, err := client.Get(poloniexEndpoint)
 	if err != nil {
-		errorHandler("Could not fetch Poloniex data: "+err.Error(), ch)
+		errorHandler("Could not fetch Poloniex data: ", err, ch)
 		return
 	}
 
@@ -27,7 +27,7 @@ func fetchBidAskPoloniex(ch chan<- tickermodels.Ticker) {
 	resp.Body.Close()
 
 	if err != nil {
-		errorHandler("Could not parse Poloniex json: "+err.Error(), ch)
+		errorHandler("Could not parse Poloniex json: ", err, ch)
 		return
 	}
 

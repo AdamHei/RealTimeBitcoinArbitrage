@@ -17,7 +17,7 @@ func fetchBidAskBinance(ch chan<- tickermodels.Ticker) {
 	binanceRequest := buildBinanceRequest()
 	resp, err := http.Get(binanceRequest)
 	if err != nil {
-		errorHandler("Could not fetch data from Bitfinex"+err.Error(), ch)
+		errorHandler("Could not fetch data from Bitfinex", err, ch)
 		return
 	}
 
@@ -25,7 +25,7 @@ func fetchBidAskBinance(ch chan<- tickermodels.Ticker) {
 	err = json.NewDecoder(resp.Body).Decode(binanceTicker)
 	resp.Body.Close()
 	if err != nil {
-		errorHandler("Could not parse Binance response"+err.Error(), ch)
+		errorHandler("Could not parse Binance response", err, ch)
 		return
 	}
 
