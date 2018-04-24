@@ -15,6 +15,7 @@ API for providing real-time Bitcoin arbitrage data across several exchanges
 - Binance
 - Bitfinex
 - Bitstamp
+- ExMo
 - GDAX
 - Gemini
 - Kraken
